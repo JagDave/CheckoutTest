@@ -2,10 +2,10 @@
 {
     public class Checkout : ICheckout
     {
-        private readonly List<PriceListItem> _prices;
-        private readonly List<Discount> _discounts;
+        private readonly List<IPriceListItem> _prices;
+        private readonly List<IDiscount> _discounts;
         private List<string> _basket = new List<string>();
-        public Checkout(List<PriceListItem> pricelist, List<Discount> discounts)
+        public Checkout(List<IPriceListItem> pricelist, List<IDiscount> discounts)
         {
             _prices = pricelist;
             _discounts = discounts;

@@ -17,13 +17,13 @@ namespace CheckoutUnitTests
         public void Test1(string[] items, int expected)
         {
             //Setup pricelist to use
-            List<PriceListItem> prices = new List<PriceListItem>();
+            List<IPriceListItem> prices = new List<IPriceListItem>();
             prices.Add(new PriceListItem("A", 50));
             prices.Add(new PriceListItem("B", 30));
             prices.Add(new PriceListItem("C", 20));
             prices.Add(new PriceListItem("D", 15));
 
-            List<Discount> discounts = new List<Discount>();
+            List<IDiscount> discounts = new List<IDiscount>();
             discounts.Add(new Discount("A", 3, 130));
             discounts.Add(new Discount("B", 2, 45));
 
