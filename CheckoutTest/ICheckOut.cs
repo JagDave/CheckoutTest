@@ -26,27 +26,32 @@ namespace CheckoutTest
         public int GetTotalPrice()
         {
             //Get a distinct list of items
-            List<string> _distinctItems = _basket.Distinct();
+            List<string> _distinctItems = _basket.Distinct().ToList();
             int total = 0;
 
             foreach (var prod in _distinctItems)
             {
                 //get count from basket
                 int itemCount = _basket.Count(p => p == prod);
+                int xDiscount = 0;
 
                 //Calc discount items
                 if (_discounts.Any(d => d.DiscountItem == prod))
                 {
                     int discountNo = _discounts.First(d => d.DiscountItem == prod).DiscountQty;
                     if (discountNo != 0) {
-                        int xDiscount = (itemCount / discountNo);
+                        xDiscount = (itemCount / discountNo) * _discounts.First(d=>d.DiscountItem==prod).DiscountAmount;
+
                     }
 
+                    //calc remainder
+                    int NotDiscounted = itemCount % discountNo * _prices.First(p=>p.ItemName==prod).ItemPrice;
 
+                    total = total + xDiscount + NotDiscounted;
                 }
 
-                //calc remainder
             }
+            return total;
         }
 
         public void Scan(string item)
