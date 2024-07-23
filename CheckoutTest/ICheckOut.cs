@@ -23,7 +23,7 @@ namespace CheckoutTest
             _prices.Add(new PriceList("C", 20, 0, 0));
             _prices.Add(new PriceList("D", 15, 0, 0));
 
-        
+
         }
     }
     interface IPriceListItem
@@ -31,13 +31,22 @@ namespace CheckoutTest
         public string ItemName { get; set; }
         public int ItemPrice { get; set; }
         public int DiscountQty { get; set; }
-        public int DiscounytAmount { get; set; }
+        public int DiscountAmount { get; set; }
     }
-    class PriceListItem 
+    class PriceListItem : IPriceListItem
     {
-        public PriceListItem(string itemName, int ItemPrice, int discountQty = 0, int discountAmount = 0)
-        {
 
+        public string ItemName { get; set; }
+        public int ItemPrice { get; set; }
+        public int DiscountQty { get; set; }
+        public int DiscountAmount { get; set; }
+        
+        public PriceListItem(string itemName, int itemPrice, int discountQty = 0, int discountAmount = 0)
+        {
+            ItemName = itemName;
+            ItemPrice = itemPrice;
+            DiscountQty= discountQty;
+            DiscountAmount = discountAmount;
         }
     }
 }
