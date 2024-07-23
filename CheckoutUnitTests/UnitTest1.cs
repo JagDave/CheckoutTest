@@ -6,7 +6,13 @@ namespace CheckoutUnitTests
     public class UnitTest1
     {
         [Theory]
-        [InlineData(new string[] { "A","B","C","D","A", "A", "A", "B", "B", "B","D", "B" } ,335)]
+        [InlineData(new string[] { "A", "B", "C", "D", "A", "A", "A", "B", "B", "B", "D", "B" }, 335)]
+        [InlineData(new string[] { "A","A", "A", "A" }, 180)]
+        [InlineData(new string[] { "B", "B", "B", "B", "B" }, 120)]
+        [InlineData(new string[] { "C" }, 20)]
+        [InlineData(new string[] { "D","D" }, 30)]
+
+
         public void Test1(string[] items, int expected)
         {
             //Setup pricelist to use
