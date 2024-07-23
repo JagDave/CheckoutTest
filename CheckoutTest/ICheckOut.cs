@@ -12,10 +12,10 @@ namespace CheckoutTest
         void Scan(string item);
         int GetTotalPrice();
     }
-    public class Checkout:ICheckout
+    public class Checkout : ICheckout
     {
         private readonly List<PriceListItem> _prices;
-        private List<string> basket = new List<string> ();
+        private List<string> basket = new List<string>();
         public Checkout(List<PriceListItem> pricelist)
         {
             _prices = pricelist;
@@ -28,30 +28,36 @@ namespace CheckoutTest
 
         public void Scan(string item)
         {
-            throw new NotImplementedException();
+            basket.Add(item);
         }
     }
     public interface IPriceListItem
     {
         public string ItemName { get; set; }
         public int ItemPrice { get; set; }
-        public int DiscountQty { get; set; }
-        public int DiscountAmount { get; set; }
     }
     public class PriceListItem : IPriceListItem
     {
 
         public string ItemName { get; set; }
         public int ItemPrice { get; set; }
-        public int DiscountQty { get; set; }
-        public int DiscountAmount { get; set; }
-        
+
         public PriceListItem(string itemName, int itemPrice, int discountQty = 0, int discountAmount = 0)
         {
             ItemName = itemName;
             ItemPrice = itemPrice;
-            DiscountQty= discountQty;
-            DiscountAmount = discountAmount;
         }
+    }
+    public interface IDiscount
+    {
+        public int DiscountQty { get; set; }
+        public int DiscountAmount { get; set; }
+    }
+
+    public class Discount : IDiscount
+    {
+
+        public int DiscountQty { get; set; }
+        public int DiscountAmount { get; set; }
     }
 }
