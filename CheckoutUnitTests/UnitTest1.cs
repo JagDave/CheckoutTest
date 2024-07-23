@@ -36,8 +36,6 @@ namespace CheckoutUnitTests
                 checkout.Scan(item);
             }
 
-            //Calculate Discounts
-
             //Calculate total price
             Assert.Equal(expected, checkout.GetTotalPrice());
         }
