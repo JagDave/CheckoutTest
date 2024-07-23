@@ -1,11 +1,13 @@
 using CheckoutTest;
+using Xunit.Abstractions;
 
 namespace CheckoutUnitTests
 {
     public class UnitTest1
     {
-        [Fact]
-        public void Test1(List<string> items, int expected)
+        [Theory]
+        [InlineData(new string[] { "A","B","C","D","A", "A", "A", "B", "B", "B","D", "B" } ,335)]
+        public void Test1(string[] items, int expected)
         {
             //Setup pricelist to use
             List<PriceListItem> prices = new List<PriceListItem>();

@@ -56,7 +56,7 @@ namespace CheckoutTest
 
         public void Scan(string item)
         {
-            basket.Add(item);
+            _basket.Add(item);
         }
     }
     public interface IPriceListItem
