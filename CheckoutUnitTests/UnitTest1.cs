@@ -14,8 +14,11 @@ namespace CheckoutUnitTests
             prices.Add(new PriceListItem("C", 20, 0, 0));
             prices.Add(new PriceListItem("D", 15, 0, 0));
 
+            List<IDiscount> discounts = new List<IDiscount>();
+            discounts.Add(new Discount("A", 3, 130));
+            discounts.Add(new Discount("B", 2, 45));
 
-            ICheckout checkout = new Checkout(prices);
+            ICheckout checkout = new Checkout(prices, discounts);
 
 
             //Scan items
