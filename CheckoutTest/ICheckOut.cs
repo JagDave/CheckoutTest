@@ -15,15 +15,25 @@ namespace CheckoutTest
     public class Checkout : ICheckout
     {
         private readonly List<PriceListItem> _prices;
-        private List<string> basket = new List<string>();
-        public Checkout(List<PriceListItem> pricelist)
+        private readonly List<Discount> _discounts;
+        private List<string> _basket = new List<string>();
+        public Checkout(List<PriceListItem> pricelist, List<Discount> discounts )
         {
             _prices = pricelist;
+            _discounts = discounts;
         }
 
         public int GetTotalPrice()
         {
-            throw new NotImplementedException();
+            //Get a distinct list of items
+            List<string> _distinctItems = _basket.Distinct();
+
+            //for each
+                //get count from basket
+                
+                //Cacl discount items
+
+                //calc remainder
         }
 
         public void Scan(string item)
