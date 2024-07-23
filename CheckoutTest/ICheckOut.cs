@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CheckoutTest
 {
-    interface ICheckout
+    public interface ICheckout
     {
         void Scan(string item);
         int GetTotalPrice();
