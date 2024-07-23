@@ -17,7 +17,7 @@ namespace CheckoutTest
         private readonly List<PriceListItem> _prices;
         private readonly List<Discount> _discounts;
         private List<string> _basket = new List<string>();
-        public Checkout(List<PriceListItem> pricelist, List<Discount> discounts )
+        public Checkout(List<PriceListItem> pricelist, List<Discount> discounts)
         {
             _prices = pricelist;
             _discounts = discounts;
@@ -34,21 +34,28 @@ namespace CheckoutTest
                 //get count from basket
                 int itemCount = _basket.Count(p => p == prod);
                 int xDiscount = 0;
-
+                int discountNo = 0;
+                int NotDiscounted = 0;
                 //Calc discount items
-                if (_discounts.Any(d => d.DiscountItem == prod))
+                if (_discounts.Any(d => d.DiscountItem == prod && d.DiscountQty > 0 && d.DiscountAmount > 0))
                 {
-                    int discountNo = _discounts.First(d => d.DiscountItem == prod).DiscountQty;
-                    if (discountNo != 0) {
-                        xDiscount = (itemCount / discountNo) * _discounts.First(d=>d.DiscountItem==prod).DiscountAmount;
+                    discountNo = _discounts.First(d => d.DiscountItem == prod && d.DiscountQty > 0 && d.DiscountAmount > 0).DiscountQty;
+                    if (discountNo != 0)
+                    {
+                        xDiscount = (itemCount / discountNo) * _discounts.First(d => d.DiscountItem == prod && d.DiscountQty > 0 && d.DiscountAmount > 0).DiscountAmount;
 
                     }
 
                     //calc remainder
-                    int NotDiscounted = itemCount % discountNo * _prices.First(p=>p.ItemName==prod).ItemPrice;
-
-                    total = total + xDiscount + NotDiscounted;
+                    NotDiscounted = (itemCount % discountNo) * _prices.First(p => p.ItemName == prod).ItemPrice;
                 }
+                else
+                {
+                    NotDiscounted = itemCount * _prices.First(p => p.ItemName == prod).ItemPrice;
+                }
+
+                total = total + xDiscount + NotDiscounted;
+
 
             }
             return total;
@@ -70,7 +77,7 @@ namespace CheckoutTest
         public string ItemName { get; set; }
         public int ItemPrice { get; set; }
 
-        public PriceListItem(string itemName, int itemPrice, int discountQty = 0, int discountAmount = 0)
+        public PriceListItem(string itemName, int itemPrice)
         {
             ItemName = itemName;
             ItemPrice = itemPrice;
