@@ -5,11 +5,20 @@ namespace CheckoutUnitTests
     public class UnitTest1
     {
         [Fact]
-        public void Test1(List<string> items,int expected)
+        public void Test1(List<string> items, int expected)
         {
-            //Scan items
-            ICheckout checkout = new Checkout();
+            //Setup pricelist to use
+            List<PriceListItem> prices = new List<PriceListItem>();
+            prices.Add(new PriceListItem("A", 50, 3, 130));
+            prices.Add(new PriceListItem("B", 30, 2, 45));
+            prices.Add(new PriceListItem("C", 20, 0, 0));
+            prices.Add(new PriceListItem("D", 15, 0, 0));
 
+
+            ICheckout checkout = new Checkout(prices);
+
+
+            //Scan items
             foreach (var item in items)
             {
                 checkout.Scan(item);
